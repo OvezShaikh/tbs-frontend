@@ -7,6 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
+    console.log("User from storage:", storedUser);
     if (storedUser?.role) setRole(storedUser.role);
   }, []);
 

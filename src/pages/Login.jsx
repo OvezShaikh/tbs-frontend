@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loginUser } from "../services/api";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -9,11 +9,16 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await loginUser(form);
+      const res = await axios.post("http://localhost:5000/api/users/login", form);
+
+      // Save both token and user object to localStorage
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       navigate("/home");
     } catch (err) {
       alert("Invalid login credentials");
+      console.error(err);
     }
   };
 
@@ -41,7 +46,10 @@ export default function Login() {
           Login
         </button>
         <p className="mt-4 text-center">
-          Don't have an account? <a href="/register" className="text-blue-600 hover:underline">Register</a>
+          Don't have an account?{" "}
+          <a href="/register" className="text-blue-600 hover:underline">
+            Register
+          </a>
         </p>
       </form>
     </div>

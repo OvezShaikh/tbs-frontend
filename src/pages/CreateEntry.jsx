@@ -1,24 +1,32 @@
-// src/pages/CreateEntry.jsx
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreateEntry() {
   const [formData, setFormData] = useState({
-    date: '',
     lrNo: '',
+    month: '',
+    date: '',
     vehicleNo: '',
-    transporterName: '',
+    vehicleType: '',
     origin: '',
     destination: '',
-    weight: '',
+    driverNo: '',
+    broker: '',
+    lorryHire: '',
+    advance: '',
+    approvalByCMD: '',
+    balance: '',
     freightRate: '',
-    invoiceNo: '',
+    lrCharges: '',
     invoiceAmount: '',
-    gst: '',
+    margin: '',
+    marginPercent: '',
+    pod: '',
+    billNo: '',
+    remarks: '',
     paymentStatus: 'Unpaid',
-    paymentDate: '',
-    remarks: ''
+    paymentDate: ''
   });
 
   const navigate = useNavigate();
@@ -45,47 +53,94 @@ export default function CreateEntry() {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto bg-white shadow-md rounded mt-8">
-      <h2 className="text-2xl font-bold mb-4">Create Transport Entry</h2>
+    <div className="p-4 max-w-3xl mx-auto bg-gray-200 shadow-md rounded mt-8">
+      <h2 className="text-2xl font-bold mb-6 text-center">Create Transport Entry</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+
+        {/* Form Fields with Labels */}
         {[
-          ['date', 'Date', 'date'],
           ['lrNo', 'LR No'],
+          ['month', 'Month', 'month'],
+          ['date', 'Date', 'date'],
           ['vehicleNo', 'Vehicle No'],
-          ['transporterName', 'Transporter Name'],
-          ['origin', 'Origin'],
+          ['vehicleType', 'Vehicle Type'],
+          ['origin', 'From'],
           ['destination', 'Destination'],
-          ['weight', 'Weight'],
-          ['freightRate', 'Freight Rate'],
-          ['invoiceNo', 'Invoice No'],
-          ['invoiceAmount', 'Invoice Amount'],
-          ['gst', 'GST'],
-          ['paymentDate', 'Payment Date', 'date'],
-          ['remarks', 'Remarks'],
+          ['driverNo', 'Driver No'],
+          ['broker', 'Broker'],
+          ['lorryHire', 'Lorry Hire'],
+          ['advance', 'Advance'],
+          ['balance', 'Balance'],
+          ['freightRate', 'Freight'],
+          ['lrCharges', 'LR Charges'],
+          ['invoiceAmount', 'Billed Amount'],
+          ['margin', 'Margin'],
+          ['marginPercent', 'M%'],
+          ['pod', 'POD'],
+          ['billNo', 'Bill No'],
+          ['remarks', 'Remarks']
         ].map(([key, label, type = 'text']) => (
-          <input
-            key={key}
-            type={type}
-            name={key}
-            value={formData[key]}
-            onChange={handleChange}
-            placeholder={label}
-            className="p-2 border rounded"
-            required={key !== 'remarks'}
-          />
+          <div key={key} className="flex flex-col">
+            <label htmlFor={key} className="text-sm font-medium text-gray-700 mb-1">{label}</label>
+            <input
+              id={key}
+              type={type}
+              name={key}
+              value={formData[key]}
+              onChange={handleChange}
+              placeholder={label}
+              className="p-2 border rounded"
+              required={key !== 'remarks'}
+            />
+          </div>
         ))}
 
-        <select
-          name="paymentStatus"
-          value={formData.paymentStatus}
-          onChange={handleChange}
-          className="p-2 border rounded"
-        >
-          <option value="Paid">Paid</option>
-          <option value="Unpaid">Unpaid</option>
-        </select>
+        {/* Approval by CMD Dropdown */}
+        <div className="flex flex-col">
+          <label className="text-sm font-medium text-gray-700 mb-1">Approval by CMD</label>
+          <select
+            name="approvalByCMD"
+            value={formData.approvalByCMD}
+            onChange={handleChange}
+            className="p-2 border rounded"
+            required
+          >
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
 
-        <button type="submit" className="col-span-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        {/* Payment Status Dropdown */}
+        <div className="flex flex-col">
+          <label className="text-sm font-medium text-gray-700 mb-1">Payment Status</label>
+          <select
+            name="paymentStatus"
+            value={formData.paymentStatus}
+            onChange={handleChange}
+            className="p-2 border rounded"
+          >
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+          </select>
+        </div>
+
+        {/* Payment Date Field */}
+        <div className="flex flex-col">
+          <label className="text-sm font-medium text-gray-700 mb-1">Payment Date</label>
+          <input
+            type="date"
+            name="paymentDate"
+            value={formData.paymentDate}
+            onChange={handleChange}
+            className="p-2 border rounded"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="col-span-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
           Submit Entry
         </button>
       </form>
