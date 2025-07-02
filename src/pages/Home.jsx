@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,7 +23,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-700 text-white flex justify-between items-center px-6 py-4">
+      <Navbar />
+      {/* <header className="bg-blue-700 text-white flex justify-between items-center px-6 py-4">
         <h1 className="text-xl font-bold">TBS Dashboard</h1>
         <button
           onClick={handleLogout}
@@ -29,7 +32,7 @@ export default function Home() {
         >
           Logout
         </button>
-      </header>
+      </header> */}
 
       <main className="max-w-4xl mx-auto mt-12 px-4">
         <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">

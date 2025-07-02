@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 export default function CreateEntry() {
   const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ export default function CreateEntry() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/entries', formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/entries`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -53,9 +54,12 @@ export default function CreateEntry() {
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto bg-gray-200 shadow-md rounded mt-8">
+    <>
+    <Navbar />
+    <div className="p-4 max-w-6xl mx-auto bg-gray-200 shadow-md rounded mt-8">
+      
       <h2 className="text-2xl font-bold mb-6 text-center">Create Transport Entry</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-6">
 
         {/* Form Fields with Labels */}
         {[
@@ -139,11 +143,12 @@ export default function CreateEntry() {
 
         <button
           type="submit"
-          className="col-span-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="col-span-1 mt-20 gap-4 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
         >
           Submit Entry
         </button>
       </form>
     </div>
+    </>
   );
 }
