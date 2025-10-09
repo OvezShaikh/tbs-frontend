@@ -18,10 +18,14 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-blue-700 p-4 text-white flex justify-between items-center w-full">
+    <nav className="bg-blue-300 p-4 text-white flex justify-between items-center w-full">
       <div className="flex items-center gap-6">
         <Link to="/home" className="font-bold text-lg text-white">
-          TBS Dashboard
+          <img
+            src="/starrllogo.png"
+            alt="Logo"
+            className="h-8 w-38 inline-block mr-2"
+          />
         </Link>
         {username && (
           <span className="text-sm text-white">

@@ -31,32 +31,37 @@ export default function UpdateEntry() {
     paymentDate: ''
   });
 
-  const [role, setRole] = useState('');
-  const [authorized, setAuthorized] = useState(false);
-
   const { id } = useParams();
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  // Role check
+  const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Check user role
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser?.role) {
-      setRole(storedUser.role);
-      setAuthorized(storedUser.role === 'billing' || storedUser.role === 'admin');
+    if (storedUser?.role === 'billing' || storedUser?.role === 'admin') {
+      setAuthorized(true);
     }
+    setLoading(false);
   }, []);
 
-  // Fetch entry details
+  // Fetch entry once authorized and id is available
   useEffect(() => {
-    if (authorized) {
-      axios.get(`${import.meta.env.VITE_API_URL}/api/entries/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(res => setFormData(res.data))
-      .catch(() => alert('Error fetching entry.'));
-    }
-  }, [id, token, authorized]);
+    if (!authorized || !id) return;
+
+    axios.get(`${import.meta.env.VITE_API_URL}/api/entries/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      setFormData(res.data);
+    })
+    .catch(err => {
+      console.error('Fetch error:', err);
+      alert('Error fetching entry details.');
+    });
+  }, [authorized, id, token]);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -65,16 +70,31 @@ export default function UpdateEntry() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    const payload = {
+      ...formData,
+      advance: Number(formData.advance) || 0,
+      balance: Number(formData.balance) || 0,
+      freightRate: Number(formData.freightRate) || 0,
+      lrCharges: Number(formData.lrCharges) || 0,
+      invoiceAmount: Number(formData.invoiceAmount) || 0,
+      marginPercent: Number(formData.marginPercent) || 0,
+      lorryHire: Number(formData.lorryHire) || 0
+    };
+
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/entries/${id}`, formData, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/entries/${id}`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Entry updated successfully!');
       navigate('/home');
     } catch (err) {
+      console.error(err);
       alert('Error updating entry.');
     }
   };
+
+  if (loading) return <div className="text-center mt-20">Loading...</div>;
 
   if (!authorized) {
     return (

@@ -6,6 +6,8 @@ import CreateEntry from './pages/CreateEntry';
 import ViewEntries from './pages/ViewEntries';
 import ProtectedRoute from "./components/ProtectedRoute";
 import UpdateEntry from './pages/UpdateEntry';
+import VehicleBulkUpload from './pages/VehicleBulkUpload';
+import RateManager from './pages/RateManager';
 
 function App() {
   return (
@@ -21,9 +23,11 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/bulk-upload" element={<ProtectedRoute><VehicleBulkUpload /></ProtectedRoute>} />
         <Route path="/create" element={<ProtectedRoute><CreateEntry /></ProtectedRoute>} />
         <Route path="/view" element={<ProtectedRoute><ViewEntries /></ProtectedRoute>} />
         <Route path="/update/:id" element={<ProtectedRoute><UpdateEntry /></ProtectedRoute>} />
+        <Route path="/rate-manager" element={<ProtectedRoute><RateManager /></ProtectedRoute>} />
         <Route path="*" element={<h1 className="text-center text-2xl font-bold mt-20">404 - Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>
