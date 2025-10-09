@@ -49,8 +49,8 @@ export default function Home() {
               }}
               disabled={!isCreateAllowed}
               className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${isCreateAllowed
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-gray-200 text-gray-500 cursor-not-allowed"
                 }`}
               title={
                 isCreateAllowed
@@ -80,8 +80,8 @@ export default function Home() {
               }}
               disabled={!isViewAllowed}
               className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${isViewAllowed
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-gray-200 text-gray-500 cursor-not-allowed"
                 }`}
               title={
                 isViewAllowed
@@ -96,8 +96,8 @@ export default function Home() {
           {/* Rate Manager Card */}
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z" />
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2 text-gray-800">Rate Manager</h2>
@@ -110,8 +110,8 @@ export default function Home() {
               }}
               disabled={!isRateManagerAllowed}
               className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${isRateManagerAllowed
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-gray-200 text-gray-500 cursor-not-allowed"
                 }`}
               title={
                 isRateManagerAllowed
@@ -140,8 +140,8 @@ export default function Home() {
               }}
               disabled={role !== "admin"}
               className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${role === "admin"
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-gray-200 text-gray-500 cursor-not-allowed"
                 }`}
               title={
                 role === "admin"
